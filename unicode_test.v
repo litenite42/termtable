@@ -15,6 +15,6 @@ fn test_cjk_chars() {
 		header_style: .plain
 	}
 	mut exp := os.read_file('$termtable.dir/tests/unicode/cjk.out') or { panic(err) }
-	exp = exp.trim_suffix('\n')
+	exp = exp.trim_string_right('\n')
 	assert table.str() == exp
 }

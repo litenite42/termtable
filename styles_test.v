@@ -26,7 +26,7 @@ fn test_table_styles() {
 		header_style: .plain
 	}
 	for i := 0; true; i++ {
-		s := Style(i)
+		s := unsafe { Style(i) }
 		if s.str() == 'unknown enum value' {
 			break
 		}
@@ -35,7 +35,7 @@ fn test_table_styles() {
 			table.custom_style = custom_style
 		}
 		mut exp := os.read_file('$termtable.dir/tests/styles/${s.str()}.out') or { panic(err) }
-		exp = exp.trim_suffix('\n')
+		exp = exp.trim_string_right('\n')
 		assert table.str() == exp
 	}
 }
@@ -49,7 +49,7 @@ fn test_single_row_tables() {
 		style: .grid
 	}
 	mut exp := os.read_file('$termtable.dir/tests/grid_single_row.out') or { panic(err) }
-	exp = exp.trim_suffix('\n')
+	exp = exp.trim_string_right('\n')
 	assert table.str() == exp
 }
 
@@ -71,7 +71,7 @@ fn test_no_padding() {
 	for s in styles {
 		table.style = s
 		mut exp := os.read_file('$termtable.dir/tests/no_padding/${s.str()}.out') or { panic(err) }
-		exp = exp.trim_suffix('\n')
+		exp = exp.trim_string_right('\n')
 		assert table.str() == exp
 	}
 }

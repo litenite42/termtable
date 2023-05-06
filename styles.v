@@ -92,8 +92,8 @@ const (
 	}
 )
 
-pub enum Style {
-	custom
+pub enum Style as u8 {
+	custom = 0
 	plain
 	grid
 	simple
